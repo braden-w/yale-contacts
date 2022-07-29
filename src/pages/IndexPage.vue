@@ -8,17 +8,22 @@ import { definitions } from 'components/supabase';
 import { ref } from 'vue';
 
 // Import all contacts that are connected to "braden.wong@yale.edu" from relationships_between_users
-const fetchContacts = async () => {
+const contacts = ref<definitions['facebook'][] | null>([]);
+
+const fetchContacts = async (): Promise<definitions['facebook'][] | null> => {
+  // Select all contacts from "users" table whose "email" is
   const { data, error } = await supabase
     .from('relationships_between_users')
-    .select('*')
+    .select('facebook(*)')
     .eq('from_email', 'braden.wong@yale.edu');
   if (error) {
     console.error(error);
   }
-  return data;
+  // Set contacts to the result of fetchContacts
+  if (!data) return null;
+  return data.map(({ facebook }) => facebook);
 };
 
+contacts.value = await fetchContacts();
 console.log(await fetchContacts());
-const contacts = ref<definitions['users'][]>([]);
 </script>
