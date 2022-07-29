@@ -1,29 +1,13 @@
 <template>
-  <q-page class="row items-center justify-evenly"> </q-page>
+  <q-page>
+    <Suspense timeout="0">
+      <!-- Make beautiful list of contact photos, name, college -->
+      <template #default> <ContactsList /></template>
+      <template #fallback><div>Loading...</div></template>
+    </Suspense>
+  </q-page>
 </template>
 
 <script setup lang="ts">
-import { supabase } from '../supabase';
-import { definitions } from 'components/supabase';
-import { ref } from 'vue';
-
-// Import all contacts that are connected to "braden.wong@yale.edu" from relationships_between_users
-const contacts = ref<definitions['facebook'][] | null>([]);
-
-const fetchContacts = async (): Promise<definitions['facebook'][] | null> => {
-  // Select all contacts from "users" table whose "email" is
-  const { data, error } = await supabase
-    .from('relationships_between_users')
-    .select('facebook(*)')
-    .eq('from_email', 'braden.wong@yale.edu');
-  if (error) {
-    console.error(error);
-  }
-  // Set contacts to the result of fetchContacts
-  if (!data) return null;
-  return data.map(({ facebook }) => facebook);
-};
-
-contacts.value = await fetchContacts();
-console.log(await fetchContacts());
+import ContactsList from '../components/ContactsList.vue';
 </script>
