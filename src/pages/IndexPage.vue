@@ -1,6 +1,10 @@
 <template>
   <q-page>
     <q-card class="q-mb-md">
+      <Suspense timeout="0">
+        <template #default> <TheAddContactInput /></template>
+        <template #fallback><div>Loading...</div></template>
+      </Suspense>
       <q-input
         v-model="filter"
         standout
@@ -23,9 +27,8 @@
 </template>
 
 <script setup lang="ts">
-import { definitions } from 'src/components/supabase';
-import { supabase } from 'src/supabase';
 import { ref } from 'vue';
 import ContactsList from '../components/ContactsList.vue';
+import TheAddContactInput from '../components/TheAddContactInput.vue';
 const filter = ref<string>('');
 </script>
