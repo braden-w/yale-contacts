@@ -6,7 +6,7 @@
         standout
         dense
         debounce="300"
-        placeholder="Filter..."
+        placeholder="Filter contacts..."
         style="width: 100%"
       >
         <template #append>
@@ -23,6 +23,7 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
 import ContactsList from '../components/ContactsList.vue';
 const filter = ref<string>('');
 </script>
