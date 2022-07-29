@@ -23,7 +23,18 @@
 </template>
 
 <script setup lang="ts">
+import { definitions } from 'src/components/supabase';
+import { supabase } from 'src/supabase';
 import { ref } from 'vue';
 import ContactsList from '../components/ContactsList.vue';
 const filter = ref<string>('');
+
+// Select all contacts from "facebook" table whose "email", "first_name", or "last_name" is not null
+const { data: allContacts, error } = await supabase
+  .from<definitions['facebook']>('facebook')
+  .select('email, first_name, last_name, image')
+  .not('email', 'is', null)
+  .not('first_name', 'is', null)
+  .not('last_name', 'is', null);
+console.log(allContacts);
 </script>
