@@ -2,8 +2,13 @@
   <q-list>
     <q-item v-for="contact in contacts" :key="contact.id">
       <q-item-section avatar>
-        <q-avatar color="primary" text-color="white" :src="contact.image">
-          {{ contact.email.charAt(0) }}
+        <q-avatar color="primary" text-color="white">
+          <img
+            v-if="contact.image"
+            :src="contact.image"
+            alt="Profile Picture"
+          />
+          <div v-else>{{ contact.email.charAt(0) }}</div>
         </q-avatar>
       </q-item-section>
 
