@@ -1,7 +1,7 @@
 <template>
   <q-select
     filled
-    :model-value="model"
+    :model-value="selectedContact"
     use-input
     hide-selected
     fill-input
@@ -22,7 +22,11 @@
     </template>
   </q-select>
 
-  <q-btn @click="addRelationshipToSupabase" :disabled="!selectedContact" color="primary">
+  <q-btn
+    @click="addRelationshipToSupabase"
+    :disabled="!selectedContact"
+    color="primary"
+  >
     Submit
   </q-btn>
 </template>
@@ -68,14 +72,18 @@ function setModel(val) {
   selectedContact.value = val;
 }
 
-async function addRelationshipToSupabase(payload) {
+async function addRelationshipToSupabase() {
   // Upsert relationship to "relationships_between_users"
   const { data, error } = await supabase
     .from<definitions['relationships_between_users']>(
       'relationships_between_users'
     )
-    .insert({ from_email: 'braden.wong@yale.edu', to_email: payload.email });
+    .insert({
+      from_email: 'braden.wong@yale.edu',
+      to_email: selectedContact.value.email,
+    });
 
-  console.log(data);
+  if (error) console.error(error);
+  else console.log(data);
 }
 </script>
