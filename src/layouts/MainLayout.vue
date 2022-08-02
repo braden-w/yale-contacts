@@ -10,7 +10,6 @@
           aria-label="Menu"
           @click="toggleLeftDrawer"
         />
-
         <q-btn
           class="text-h6 text-weight-light"
           no-caps
