@@ -34,7 +34,8 @@ const { data: allContacts, error } = await supabase
   .select('email, first_name, last_name, image')
   .not('email', 'is', null)
   .not('first_name', 'is', null)
-  .not('last_name', 'is', null);
+  .not('last_name', 'is', null)
+  .not('year', 'is', null);
 console.log(allContacts);
 // allContacts?.forEach((contact) => {
 //   contact.full_name = `${contact.first_name} ${contact.last_name}`;
