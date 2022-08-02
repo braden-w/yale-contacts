@@ -37,12 +37,12 @@ import { Ref, ref } from 'vue';
 import ContactsList from 'src/components/ContactsList.vue';
 
 // Select all contacts from "facebook" table whose "email", "first_name", or "last_name" is not null
-const { data: allContacts, error } = await supabase
+const { data: allContacts } = await supabase
   .from<
     Required<
       Pick<
         definitions['facebook'],
-        'email' | 'first_name' | 'last_name' | 'image'
+        'email' | 'first_name' | 'last_name' | 'image' | 'year'
       >
     >
   >('facebook')
