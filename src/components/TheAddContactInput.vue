@@ -1,7 +1,7 @@
 <template>
   <q-select
     filled
-    :model-value="selectedContact"
+    v-model="selectedContact"
     use-input
     hide-selected
     fill-input
@@ -21,6 +21,7 @@
       </q-item>
     </template>
   </q-select>
+  {{ selectedContact }}
 
   <q-btn
     @click="addRelationshipToSupabase"
@@ -47,11 +48,11 @@ const { data: allContacts } = await supabase
     >
   >('facebook')
   .select('email, first_name, last_name, image')
+  .not('year', 'is', null)
+  .not('college', 'is', null)
   .not('email', 'is', null)
   .not('first_name', 'is', null)
-  .not('last_name', 'is', null)
-  .not('year', 'is', null)
-  .eq('year', 2024);
+  .not('last_name', 'is', null);
 
 interface SelectOption {
   email: string;
@@ -89,7 +90,7 @@ async function addRelationshipToSupabase() {
     .from<definitions['relationships_between_users']>(
       'relationships_between_users'
     )
-    .insert({
+    .upsert({
       from_email: 'braden.wong@yale.edu',
       to_email: selectedContact.value.email,
     });
