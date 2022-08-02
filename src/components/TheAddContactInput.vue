@@ -21,7 +21,10 @@
       </q-item>
     </template>
   </q-select>
-  <q-btn @click="submit" :disabled="!model" color="primary">Submit</q-btn>
+
+  <q-btn @click="addRelationshipToSupabase" :disabled="!selectedContact" color="primary">
+    Submit
+  </q-btn>
 </template>
 <script setup lang="ts">
 import { supabase } from '../supabase';
@@ -50,7 +53,7 @@ const allOptions = allContacts?.map(
   })
 );
 
-const model = ref(null);
+const selectedContact = ref(null);
 const options = ref(allOptions);
 function filterFn(val, update, abort) {
   update(() => {
@@ -62,8 +65,9 @@ function filterFn(val, update, abort) {
   });
 }
 function setModel(val) {
-  model.value = val;
+  selectedContact.value = val;
 }
+
 async function addRelationshipToSupabase(payload) {
   // Upsert relationship to "relationships_between_users"
   const { data, error } = await supabase
