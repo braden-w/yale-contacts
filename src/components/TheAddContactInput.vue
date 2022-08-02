@@ -21,6 +21,7 @@
       </q-item>
     </template>
   </q-select>
+  <q-btn @click="submit" :disabled="!model" color="primary">Submit</q-btn>
 </template>
 <script setup lang="ts">
 import { supabase } from '../supabase';
@@ -35,7 +36,8 @@ const { data: allContacts, error } = await supabase
   .not('email', 'is', null)
   .not('first_name', 'is', null)
   .not('last_name', 'is', null)
-  .not('year', 'is', null);
+  .not('year', 'is', null)
+  .eq('year', 2024);
 console.log(allContacts);
 // allContacts?.forEach((contact) => {
 //   contact.full_name = `${contact.first_name} ${contact.last_name}`;
@@ -61,5 +63,15 @@ function filterFn(val, update, abort) {
 }
 function setModel(val) {
   model.value = val;
+}
+async function addRelationshipToSupabase(payload) {
+  // Upsert relationship to "relationships_between_users"
+  const { data, error } = await supabase
+    .from<definitions['relationships_between_users']>(
+      'relationships_between_users'
+    )
+    .insert({ from_email: 'braden.wong@yale.edu', to_email: payload.email });
+
+  console.log(data);
 }
 </script>
