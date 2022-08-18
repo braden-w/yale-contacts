@@ -42,6 +42,8 @@ const { data: allContacts } = await supabase
   .select('*');
 
 const selectedContact: Ref<definitions['users_contact_app'] | null> = ref(null);
+const setModel = (val) => (selectedContact.value = val);
+
 const options = ref(allContacts);
 function filterFn(val, update, abort) {
   update(() => {
@@ -51,9 +53,6 @@ function filterFn(val, update, abort) {
       ({ email }) => email.toLocaleLowerCase().indexOf(needle) > -1
     );
   });
-}
-function setModel(val) {
-  selectedContact.value = val;
 }
 
 async function addRelationshipToSupabase() {
