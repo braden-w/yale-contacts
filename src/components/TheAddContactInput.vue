@@ -48,7 +48,7 @@ function filterFn(val, update, abort) {
     if (!allContacts) return;
     const needle = val.toLocaleLowerCase();
     options.value = allContacts.filter(
-      ({ email, name }) => email.toLocaleLowerCase().indexOf(needle) > -1
+      ({ email }) => email.toLocaleLowerCase().indexOf(needle) > -1
     );
   });
 }
