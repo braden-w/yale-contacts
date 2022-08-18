@@ -13,7 +13,6 @@
     @filter="filterFn"
     @input-value="setModel"
     hint="Text autocomplete"
-    style="width: 250px; padding-bottom: 32px"
   >
     <template v-slot:no-option>
       <q-item>
