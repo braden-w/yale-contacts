@@ -4,8 +4,8 @@
       <q-item-section avatar>
         <q-avatar color="primary" text-color="white">
           <img
-            v-if="contact.image"
-            :src="contact.image"
+            v-if="contact.picture"
+            :src="contact.picture"
             alt="Profile Picture"
           />
           <div v-else>{{ contact.email.charAt(0) }}</div>
@@ -49,13 +49,4 @@ const fetchContacts = async (): Promise<definitions['facebook'][] | null> => {
 
 contacts.value = await fetchContacts();
 console.log(await fetchContacts());
-
-// Select all contacts from "facebook" table whose "email", "first_name", or "last_name" is not null
-const { data: allContacts, error } = await supabase
-  .from<definitions['facebook']>('facebook')
-  .select('email, first_name, last_name, image')
-  .not('email', 'is', null)
-  .not('first_name', 'is', null)
-  .not('last_name', 'is', null);
-console.log(allContacts);
 </script>
