@@ -36,40 +36,19 @@ import { definitions } from 'components/supabase';
 import { Ref, ref } from 'vue';
 import ContactsList from 'src/components/ContactsList.vue';
 
-// Select all contacts from "facebook" table whose "email", "first_name", or "last_name" is not null
+type query = definitions['users_contact_app'] & { email: string };
 const { data: allContacts } = await supabase
-  .from<
-    Required<
-      Pick<
-        definitions['facebook'],
-        'email' | 'first_name' | 'last_name' | 'image' | 'year' | 'college'
-      >
-    >
-  >('users_contact_app')
+  .from<query>('users_contact_app')
   .select('*');
 
-interface SelectOption {
-  email: string;
-  name: string;
-  avatar_url: string;
-}
-
-const allOptions: SelectOption = allContacts?.map(
-  ({ email, name, avatar_url }) => ({
-    email,
-    name,
-    avatar_url,
-  })
-);
-
-const selectedContact: Ref<SelectOption | null> = ref(null);
-const options = ref(allOptions);
+const selectedContact: Ref<definitions['users_contact_app'] | null> = ref(null);
+const options = ref(allContacts);
 function filterFn(val, update, abort) {
   update(() => {
+    if (!allContacts) return;
     const needle = val.toLocaleLowerCase();
-    options.value = allOptions.filter(
-      ({ email, first_name, last_name }) =>
-        email.toLocaleLowerCase().indexOf(needle) > -1
+    options.value = allContacts.filter(
+      ({ email, name }) => email.toLocaleLowerCase().indexOf(needle) > -1
     );
   });
 }
