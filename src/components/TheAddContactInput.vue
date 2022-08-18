@@ -42,11 +42,11 @@ const { data: allContacts } = await supabase
     Required<
       Pick<
         definitions['facebook'],
-        'email' | 'first_name' | 'last_name' | 'image' | 'year'
+        'email' | 'first_name' | 'last_name' | 'image' | 'year' | 'college'
       >
     >
   >('facebook')
-  .select('email, first_name, last_name, image')
+  .select('email, first_name, last_name, image, college')
   .not('year', 'is', null)
   .not('college', 'is', null)
   .not('email', 'is', null)
