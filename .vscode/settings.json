@@ -3,14 +3,30 @@
   "editor.guides.bracketPairs": true,
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.codeActionsOnSave": [
-    "source.fixAll.eslint"
-  ],
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "vue"
-  ],
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "editor.codeActionsOnSave": ["source.fixAll.eslint"],
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "vue"],
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#78c1ed",
+    "activityBar.background": "#78c1ed",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#e11e98",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "commandCenter.border": "#15202b99",
+    "sash.hoverBorder": "#78c1ed",
+    "statusBar.background": "#4bade7",
+    "statusBar.foreground": "#15202b",
+    "statusBarItem.hoverBackground": "#1e98e1",
+    "statusBarItem.remoteBackground": "#4bade7",
+    "statusBarItem.remoteForeground": "#15202b",
+    "titleBar.activeBackground": "#4bade7",
+    "titleBar.activeForeground": "#15202b",
+    "titleBar.inactiveBackground": "#4bade799",
+    "titleBar.inactiveForeground": "#15202b99"
+  },
+  "peacock.color": "#4bade7",
+  "[sql]": {
+    "editor.defaultFormatter": "adpyke.vscode-sql-formatter"
+  }
 }
