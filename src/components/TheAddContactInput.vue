@@ -8,7 +8,7 @@
     input-debounce="0"
     :options="options"
     option-value="email"
-    option-label="full_name"
+    option-label="name"
     option-disable="inactive"
     @filter="filterFn"
     @input-value="setModel"
@@ -45,25 +45,20 @@ const { data: allContacts } = await supabase
         'email' | 'first_name' | 'last_name' | 'image' | 'year' | 'college'
       >
     >
-  >('facebook')
-  .select('email, first_name, last_name, image, college')
-  .not('year', 'is', null)
-  .not('college', 'is', null)
-  .not('email', 'is', null)
-  .not('first_name', 'is', null)
-  .not('last_name', 'is', null);
+  >('users_contact_app')
+  .select('*');
 
 interface SelectOption {
   email: string;
-  full_name: string;
-  image: string;
+  name: string;
+  avatar_url: string;
 }
 
 const allOptions: SelectOption = allContacts?.map(
-  ({ email, first_name, last_name, image }) => ({
+  ({ email, name, avatar_url }) => ({
     email,
-    full_name: `${first_name} ${last_name}`,
-    image,
+    name,
+    avatar_url,
   })
 );
 
