@@ -4,8 +4,8 @@
       <q-item-section avatar>
         <q-avatar color="primary" text-color="white">
           <img
-            v-if="contact.picture"
-            :src="contact.picture"
+            v-if="contact.image"
+            :src="contact.image"
             alt="Profile Picture"
           />
           <div v-else>{{ contact.email.charAt(0) }}</div>
