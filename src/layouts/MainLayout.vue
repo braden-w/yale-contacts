@@ -15,8 +15,8 @@
           no-caps
           flat
           to="/"
-          icon="breakfast_dining"
-          label="Yale Buttery Book"
+          icon="groups"
+          label="Yale Contacts"
         />
         <q-avatar>
           <!-- TODO: <img src="../../public/Icon.png" alt="" /> -->
