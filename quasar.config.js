@@ -86,8 +86,20 @@ module.exports = configure(function (/* ctx */) {
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#framework
     framework: {
       config: {
+        dark: true,
         brand: {
           primary: '#00356b',
+          accent: '#5f712d',
+          'yale-blue-1': '#00356b',
+          'yale-blue-2': '#286dc0',
+          'yale-blue-3': '#63aaff',
+          'yale-gray-1': '#222222',
+          'yale-gray-2': '#4a4a4a',
+          'yale-gray-3': '#978d85',
+          'yale-gray-4': '#dddddd',
+          'yale-gray-5': '#f9f9f9',
+          'yale-accent-1': '#5f712d',
+          'yale-accent-2': '#bd5319',
         },
       },
 
