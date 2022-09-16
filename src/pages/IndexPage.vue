@@ -18,6 +18,18 @@
         </template>
       </q-input>
     </q-card>
+    <q-tabs
+      v-model="tab"
+      class="text-grey"
+      active-color="white"
+      indicator-color="primary"
+      align="justify"
+      narrow-indicator
+    >
+      <q-tab name="best" label="Best" />
+      <q-tab name="meal" label="Meal" />
+      <q-tab name="know" label="Known" />
+    </q-tabs>
     <Suspense timeout="0">
       <!-- Make beautiful list of contact photos, name, college -->
       <template #default> <ContactsList /></template>
@@ -30,5 +42,6 @@
 import { ref } from 'vue';
 import ContactsList from '../components/ContactsList.vue';
 import TheAddContactInput from '../components/TheAddContactInput.vue';
-const filter = ref<string>('');
+const filter = ref('');
+const tab = ref('best');
 </script>
