@@ -69,13 +69,13 @@ const setModel = (val: definitions['users_contact_app'] | null) =>
   (selectedContact.value = val);
 
 const options = ref(allContacts);
-function filterFn(val, update, abort) {
+function filterFn(val: string, update: (arg0: () => void) => void) {
   update(() => {
     if (!allContacts.value) return;
     const needle = val.toLocaleLowerCase();
-    options.value = allContacts.value.filter(
-      ({ email }) => email.toLocaleLowerCase().indexOf(needle) > -1
-    );
+    options.value = allContacts.value.filter(({ email }) => {
+      if (email) return email.toLocaleLowerCase().indexOf(needle) > -1;
+    });
   });
 }
 
