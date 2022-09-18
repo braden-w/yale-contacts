@@ -65,7 +65,8 @@ supabase
   });
 
 const selectedContact: Ref<definitions['users_contact_app'] | null> = ref(null);
-const setModel = (val) => (selectedContact.value = val);
+const setModel = (val: definitions['users_contact_app'] | null) =>
+  (selectedContact.value = val);
 
 const options = ref(allContacts);
 function filterFn(val, update, abort) {
