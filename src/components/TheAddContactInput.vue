@@ -21,6 +21,7 @@
         <q-item-section>
           <q-item-label>{{ scope.opt.name }}</q-item-label>
           <q-item-label caption>
+            {{ scope.opt.major ? `${scope.opt.major},` : '' }}
             {{ scope.opt.college }} {{ scope.opt.year }}
           </q-item-label>
         </q-item-section>
