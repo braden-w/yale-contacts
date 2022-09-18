@@ -26,7 +26,7 @@
         <ContactsList :contacts="contacts" />
       </q-tab-panel>
       <q-tab-panel name="meal">
-        <ContactsList :contacts="contacts" />
+        <ContactsList :contacts="contactsLow" />
       </q-tab-panel>
       <q-tab-panel name="know">
         <ContactsList :contacts="contacts" />
@@ -36,7 +36,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { supabase } from '../supabase';
 import { definitions } from 'app/types/supabase';
 import ContactsList from '../components/ContactsList.vue';
@@ -63,5 +63,9 @@ const fetchContacts = async (): Promise<definitions['facebook'][] | null> => {
   contacts.value = facebook;
   return facebook;
 };
+
+const contactsLow = computed(() => {
+  return contacts.value?.filter((contact) => contact.email.includes('brad'));
+});
 fetchContacts();
 </script>
