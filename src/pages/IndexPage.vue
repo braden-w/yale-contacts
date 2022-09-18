@@ -1,10 +1,7 @@
 <template>
   <q-page>
     <q-card class="q-mb-md">
-      <Suspense timeout="0">
-        <template #default> <TheAddContactInput /></template>
-        <template #fallback><div>Loading...</div></template>
-      </Suspense>
+      <TheAddContactInput />
       <q-input
         v-model="filter"
         standout
