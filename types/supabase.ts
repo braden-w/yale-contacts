@@ -1023,6 +1023,7 @@ export interface paths {
         query: {
           from_email?: parameters["rowFilter.relationships_between_users.from_email"];
           to_email?: parameters["rowFilter.relationships_between_users.to_email"];
+          strength?: parameters["rowFilter.relationships_between_users.strength"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -1075,6 +1076,7 @@ export interface paths {
         query: {
           from_email?: parameters["rowFilter.relationships_between_users.from_email"];
           to_email?: parameters["rowFilter.relationships_between_users.to_email"];
+          strength?: parameters["rowFilter.relationships_between_users.strength"];
         };
         header: {
           /** Preference */
@@ -1091,6 +1093,7 @@ export interface paths {
         query: {
           from_email?: parameters["rowFilter.relationships_between_users.from_email"];
           to_email?: parameters["rowFilter.relationships_between_users.to_email"];
+          strength?: parameters["rowFilter.relationships_between_users.strength"];
         };
         body: {
           /** relationships_between_users */
@@ -1830,6 +1833,43 @@ export interface paths {
       responses: {
         /** No Content */
         204: never;
+      };
+    };
+  };
+  "/users_contact_app": {
+    get: {
+      parameters: {
+        query: {
+          email?: parameters["rowFilter.users_contact_app.email"];
+          name?: parameters["rowFilter.users_contact_app.name"];
+          avatar_url?: parameters["rowFilter.users_contact_app.avatar_url"];
+          college?: parameters["rowFilter.users_contact_app.college"];
+          major?: parameters["rowFilter.users_contact_app.major"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["users_contact_app"][];
+        };
+        /** Partial Content */
+        206: unknown;
       };
     };
   };
@@ -2816,19 +2856,46 @@ export interface definitions {
     people?: string;
   };
   relationships_between_users: {
-    /** Format: character varying */
+    /**
+     * Format: character varying
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
     from_email: string;
-    /** Format: character varying */
+    /**
+     * Format: character varying
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     * This is a Foreign Key to `facebook.email`.<fk table='facebook' column='email'/>
+     */
     to_email: string;
+    /** Format: smallint */
+    strength?: number;
   };
   relationships_between_users_bidirectional: {
-    /** Format: character varying */
+    /**
+     * Format: character varying
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
     from_email?: string;
-    /** Format: character varying */
+    /**
+     * Format: character varying
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
     to_email?: string;
-    /** Format: character varying */
+    /**
+     * Format: character varying
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
     returning_from?: string;
-    /** Format: character varying */
+    /**
+     * Format: character varying
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
     returning_to?: string;
   };
   relationships_between_users_old: {
@@ -3062,6 +3129,18 @@ export interface definitions {
     instagram?: string;
     /** Format: character varying */
     linkedin?: string;
+  };
+  users_contact_app: {
+    /** Format: character varying */
+    email?: string;
+    /** Format: character varying */
+    name?: string;
+    /** Format: character varying */
+    avatar_url?: string;
+    /** Format: character varying */
+    college?: string;
+    /** Format: character varying */
+    major?: string;
   };
   users_facebook_places: {
     /**
@@ -3593,6 +3672,8 @@ export interface parameters {
   "rowFilter.relationships_between_users.from_email": string;
   /** Format: character varying */
   "rowFilter.relationships_between_users.to_email": string;
+  /** Format: smallint */
+  "rowFilter.relationships_between_users.strength": string;
   /** @description relationships_between_users_bidirectional */
   "body.relationships_between_users_bidirectional": definitions["relationships_between_users_bidirectional"];
   /** Format: character varying */
@@ -3796,6 +3877,18 @@ export interface parameters {
   "rowFilter.users3.instagram": string;
   /** Format: character varying */
   "rowFilter.users3.linkedin": string;
+  /** @description users_contact_app */
+  "body.users_contact_app": definitions["users_contact_app"];
+  /** Format: character varying */
+  "rowFilter.users_contact_app.email": string;
+  /** Format: character varying */
+  "rowFilter.users_contact_app.name": string;
+  /** Format: character varying */
+  "rowFilter.users_contact_app.avatar_url": string;
+  /** Format: character varying */
+  "rowFilter.users_contact_app.college": string;
+  /** Format: character varying */
+  "rowFilter.users_contact_app.major": string;
   /** @description users_facebook_places */
   "body.users_facebook_places": definitions["users_facebook_places"];
   /** Format: uuid */
