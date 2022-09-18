@@ -15,23 +15,23 @@
         </template>
       </q-input>
     </q-card>
-    <q-tabs
-      v-model="tab"
-      class="text-grey"
-      active-color="white"
-      indicator-color="primary"
-      align="justify"
-      narrow-indicator
-    >
+    <q-tabs v-model="tab" indicator-color="primary" align="justify">
       <q-tab name="best" label="Best" />
       <q-tab name="meal" label="Meal" />
       <q-tab name="know" label="Known" />
     </q-tabs>
-    <Suspense timeout="0">
-      <!-- Make beautiful list of contact photos, name, college -->
-      <template #default> <ContactsList /></template>
-      <template #fallback><div>Loading...</div></template>
-    </Suspense>
+    <q-separator />
+    <q-tab-panels v-model="tab">
+      <q-tab-panel name="best">
+        <Suspense timeout="0">
+          <!-- Make beautiful list of contact photos, name, college -->
+          <template #default> <ContactsList /></template>
+          <template #fallback><div>Loading...</div></template>
+        </Suspense></q-tab-panel
+      >
+      <q-tab-panel name="meal"></q-tab-panel>
+      <q-tab-panel name="know"></q-tab-panel>
+    </q-tab-panels>
   </q-page>
 </template>
 
