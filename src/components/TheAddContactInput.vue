@@ -11,7 +11,6 @@
     option-label="name"
     option-disable="inactive"
     @filter="filterFn"
-    @input-value="setModel"
     hint="Text autocomplete"
   >
     <template v-slot:option="scope">
@@ -65,9 +64,6 @@ supabase
   });
 
 const selectedContact: Ref<definitions['users_contact_app'] | null> = ref(null);
-const setModel = (val: definitions['users_contact_app'] | null) =>
-  (selectedContact.value = val);
-
 const options = ref(allContacts);
 function filterFn(val: string, update: (arg0: () => void) => void) {
   update(() => {
