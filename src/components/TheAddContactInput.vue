@@ -14,6 +14,20 @@
     @input-value="setModel"
     hint="Text autocomplete"
   >
+    <template v-slot:option="scope">
+      <q-item v-bind="scope.itemProps">
+        <q-item-section avatar>
+          <q-img :src="scope.opt.avatar_url" />
+        </q-item-section>
+        <q-item-section>
+          <q-item-label>{{ scope.opt.name }}</q-item-label>
+          <q-item-label caption>
+            {{ scope.opt.college }} {{ scope.opt.year }}
+          </q-item-label>
+        </q-item-section>
+      </q-item>
+    </template>
+
     <template v-slot:no-option>
       <q-item>
         <q-item-section class="text-grey"> No results </q-item-section>
@@ -21,7 +35,13 @@
     </template>
   </q-select>
   {{ selectedContact }}
-
+  <q-avatar color="primary" text-color="white">
+    <img
+      v-if="selectedContact"
+      :src="selectedContact.avatar_url"
+      alt="Profile Picture"
+    />
+  </q-avatar>
   <q-btn
     @click="addRelationshipToSupabase"
     :disabled="!selectedContact"
@@ -32,9 +52,8 @@
 </template>
 <script setup lang="ts">
 import { supabase } from '../supabase';
-import { definitions } from 'components/supabase';
+import { definitions } from 'app/types/supabase';
 import { Ref, ref } from 'vue';
-import ContactsList from 'src/components/ContactsList.vue';
 
 type query = definitions['users_contact_app'] & { email: string };
 const { data: allContacts } = await supabase
@@ -65,6 +84,7 @@ async function addRelationshipToSupabase() {
     .upsert({
       from_email: 'braden.wong@yale.edu',
       to_email: selectedContact.value.email,
+      strength: 1,
     });
 
   if (error) console.error(error);
