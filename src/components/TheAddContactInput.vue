@@ -56,9 +56,13 @@ import { definitions } from 'app/types/supabase';
 import { Ref, ref } from 'vue';
 
 type query = Required<definitions['users_contact_app']>;
-const { data: allContacts } = await supabase
+let allContacts: query[] = [];
+supabase
   .from<query>('users_contact_app')
-  .select('*');
+  .select('*')
+  .then(({ data }) => {
+    allContacts = data as query[];
+  });
 
 const selectedContact: Ref<definitions['users_contact_app'] | null> = ref(null);
 const setModel = (val) => (selectedContact.value = val);
