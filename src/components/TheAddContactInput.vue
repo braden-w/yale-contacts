@@ -54,16 +54,22 @@ import { supabase } from '../supabase';
 import { definitions } from 'app/types/supabase';
 import { Ref, ref } from 'vue';
 
-type query = definitions['users_contact_app'];
+type query = definitions['users_facebook_places'];
 const allContacts: Ref<query[]> = ref([]);
 supabase
-  .from<query>('users_contact_app')
+  .from<query>('users_facebook_places')
   .select('*')
+  .not('email', 'is', 'null')
+  .not('year', 'is', 'null')
   .then(({ data }) => {
-    if (data) allContacts.value = data;
+    if (data) {
+      allContacts.value = data;
+      console.log(data);
+    }
   });
 
-const selectedContact: Ref<definitions['users_contact_app'] | null> = ref(null);
+const selectedContact: Ref<definitions['users_facebook_places'] | null> =
+  ref(null);
 const options = ref(allContacts);
 function filterFn(val: string, update: (arg0: () => void) => void) {
   update(() => {
