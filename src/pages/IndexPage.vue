@@ -23,14 +23,14 @@
     <q-separator />
     <q-tab-panels v-model="tab">
       <q-tab-panel name="best">
-        <Suspense timeout="0">
-          <!-- Make beautiful list of contact photos, name, college -->
-          <template #default> <ContactsList /></template>
-          <template #fallback><div>Loading...</div></template>
-        </Suspense></q-tab-panel
-      >
-      <q-tab-panel name="meal"></q-tab-panel>
-      <q-tab-panel name="know"></q-tab-panel>
+        <ContactsList :contacts="contacts" />
+      </q-tab-panel>
+      <q-tab-panel name="meal">
+        <ContactsList :contacts="contacts" />
+      </q-tab-panel>
+      <q-tab-panel name="know">
+        <ContactsList :contacts="contacts" />
+      </q-tab-panel>
     </q-tab-panels>
   </q-page>
 </template>
