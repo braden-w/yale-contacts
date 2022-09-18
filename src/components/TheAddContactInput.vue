@@ -55,13 +55,13 @@ import { supabase } from '../supabase';
 import { definitions } from 'app/types/supabase';
 import { Ref, ref } from 'vue';
 
-type query = Required<definitions['users_contact_app']>;
-let allContacts: query[] = [];
+type query = definitions['users_contact_app'];
+const allContacts: Ref<query[]> = ref([]);
 supabase
   .from<query>('users_contact_app')
   .select('*')
   .then(({ data }) => {
-    allContacts = data as query[];
+    if (data) allContacts.value = data;
   });
 
 const selectedContact: Ref<definitions['users_contact_app'] | null> = ref(null);
@@ -70,9 +70,9 @@ const setModel = (val) => (selectedContact.value = val);
 const options = ref(allContacts);
 function filterFn(val, update, abort) {
   update(() => {
-    if (!allContacts) return;
+    if (!allContacts.value) return;
     const needle = val.toLocaleLowerCase();
-    options.value = allContacts.filter(
+    options.value = allContacts.value.filter(
       ({ email }) => email.toLocaleLowerCase().indexOf(needle) > -1
     );
   });
