@@ -55,7 +55,7 @@ import { supabase } from '../supabase';
 import { definitions } from 'app/types/supabase';
 import { Ref, ref } from 'vue';
 
-type query = definitions['users_contact_app'] & { email: string };
+type query = Required<definitions['users_contact_app']>;
 const { data: allContacts } = await supabase
   .from<query>('users_contact_app')
   .select('*');
